@@ -1,0 +1,10 @@
+[project]
+name = "py-duck"
+version = "0.1.0"
+description = "Hello world"
+readme = "README.md"
+authors = [
+    { name = "Tom Conder", email = "tom@itstom.co" }
+]
+requires-python = ">=3.13"
+dependencies = []
