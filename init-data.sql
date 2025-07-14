@@ -1,5 +1,7 @@
 drop table if exists t_department;
 drop table if exists t_employee;
+drop sequence if exists seq_department_id;
+drop sequence if exists seq_employee_id;
 
 create table t_department
 (
