@@ -2,32 +2,19 @@
 This module demonstrates duckdb
 """
 
+from pathlib import Path
+
 import duckdb
 
 
-def init(con):
-    """Initialize database"""
-    with open("init-data.sql", "r", encoding="utf-8") as file:
-        sql_query = file.read()
-
-    con.execute(sql_query)
-
-    print("Database initialized successfully")
-
-
 def main(con):
-    """Main function"""
+    """Load the seed data and show it"""
+    con.execute(Path(__file__).with_name("init-data.sql").read_text(encoding="utf-8"))
+
     con.sql("SELECT id, name FROM t_employee").show()
     con.sql("SELECT name, location FROM t_department").show()
 
 
 if __name__ == "__main__":
-    conn = duckdb.connect(database=":memory:")
-
-    try:
-        init(conn)
+    with duckdb.connect(database=":memory:") as conn:
         main(conn)
-    except Exception as e:  # pylint: disable=broad-except
-        print(f"Error: {e}")
-    finally:
-        conn.close()
