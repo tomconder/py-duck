@@ -10,11 +10,3 @@ The project uses uv to manage Python and its dependencies. Run the demo and the 
 uv run python main.py
 uv run python -m unittest
 ```
-
-## Files
-
-* `init-data.sql` creates the two tables, with foreign keys between them, and inserts the seed data.
-* `main.py` loads the seed data and prints the queries.
-* `test_main.py` checks the schema and the seed data.
-
-The project uses Ruff to lint and format the code, and pre-commit to run Ruff and other checks on each commit.
