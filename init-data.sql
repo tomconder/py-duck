@@ -1,7 +1,5 @@
-drop table if exists t_department;
 drop table if exists t_employee;
-drop sequence if exists seq_department_id;
-drop sequence if exists seq_employee_id;
+drop table if exists t_department;
 
 create table t_department
 (
@@ -10,32 +8,23 @@ create table t_department
     location text not null
 );
 
-create sequence seq_department_id start 1;
-
 create table t_employee
 (
     id            integer primary key,
     name          text    not null,
     job           text    not null,
-    manager_id    integer null,
-    hire_date     integer not null,
+    manager_id    integer null references t_employee (id),
+    hire_date     date    not null,
     salary        integer not null,
-    department_id integer not null
+    department_id integer not null references t_department (id)
 );
 
-create sequence seq_employee_id start 1;
-
 insert into t_department
-values (nextval('seq_department_id'), 'Tech', 'Memphis');
-insert into t_department
-values (nextval('seq_department_id'), 'Finance', 'Dallas');
+values (1, 'Tech', 'Memphis'),
+       (2, 'Finance', 'Dallas');
 
 insert into t_employee
-values (nextval('seq_employee_id'), 'Vince', 'engineer', null, 1514505600, 100, 1);
-insert into t_employee
-values (nextval('seq_employee_id'), 'Mary', 'trainee', null, 1622505600, 50, 1);
-
-insert into t_employee
-values (nextval('seq_employee_id'), 'Tom', 'director', null, 1514505600, 200, 2);
-insert into t_employee
-values (nextval('seq_employee_id'), 'Penny', 'assistant', null, 1546272600, 100, 2);
+values (1, 'Vince', 'engineer', null, '2017-12-29', 100, 1),
+       (2, 'Mary', 'trainee', null, '2021-06-01', 50, 1),
+       (3, 'Tom', 'director', null, '2017-12-29', 200, 2),
+       (4, 'Penny', 'assistant', null, '2018-12-31', 100, 2);
