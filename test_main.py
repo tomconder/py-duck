@@ -1,4 +1,4 @@
-"""Checks on the seed data and schema"""
+"""Checks on the seed data and schema."""
 
 import datetime
 import unittest
@@ -9,7 +9,7 @@ from main import load
 
 
 class SeedDataTest(unittest.TestCase):
-    """Fails if a schema, seed data, or duckdb change breaks the data"""
+    """Fails if a schema, seed data, or duckdb change breaks the data."""
 
     def setUp(self):
         self.con = duckdb.connect(database=":memory:")
@@ -27,7 +27,8 @@ class SeedDataTest(unittest.TestCase):
         self.assertEqual(rows, [("Finance", 2), ("Tech", 2)])
 
     def test_hire_date_is_date(self):
-        [(hired,)] = self.con.sql("SELECT hire_date FROM t_employee WHERE id = 2").fetchall()
+        sql = "SELECT hire_date FROM t_employee WHERE id = 2"
+        [(hired,)] = self.con.sql(sql).fetchall()
         self.assertEqual(hired, datetime.date(2021, 6, 1))
 
     def test_rejects_unknown_department(self):

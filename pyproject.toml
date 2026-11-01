@@ -17,4 +17,10 @@ dev = [
 ]
 
 [tool.ruff.lint]
-extend-select = ["PL"]
+extend-select = ["E", "W", "I", "B", "UP", "SIM", "RUF", "PL", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"test_*.py" = ["D102"]
